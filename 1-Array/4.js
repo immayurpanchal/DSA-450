@@ -25,8 +25,55 @@ const sort012 = (arr, n) => {
 	}
 };
 
-const arr = [0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1];
-const n = 12;
+// Solution 2
 
-sort012(arr, n);
-console.log(arr);
+const sort012New = (arr, n) => {
+	const outputArray = [];
+	let indexOfOne = 0;
+
+	arr.forEach((item) => {
+		if (item === 2) {
+			outputArray.push(item);
+		} else if (item === 1) {
+			outputArray.splice(indexOfOne, 0, item);
+			indexOfOne++;
+		} else if (item === 0) {
+			outputArray.splice(0, 0, item);
+			indexOfOne++;
+		}
+	});
+	return outputArray;
+};
+
+const swap = (arr, index1, index2) => {
+	const temp = arr[index1];
+	arr[index1] = arr[index2];
+	arr[index2] = temp;
+};
+
+// Solution 3 - Dutch National Flag Problem
+const sort012New2 = (arr, N) => {
+	let low = 0;
+	let mid = 0;
+	let high = N - 1;
+
+	while (mid <= high) {
+		if (arr[mid] === 0) {
+			swap(arr, low, mid);
+			low++;
+			mid++;
+		} else if (arr[mid] === 1) {
+			mid++;
+		} else {
+			swap(arr, mid, high);
+			high--;
+		}
+	}
+};
+
+const arr = [0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1];
+const arr2 = [0, 2, 1, 2, 0];
+
+sort012New2(arr2, arr2.length);
+// sort012(arr, n);
+console.log(arr2);
